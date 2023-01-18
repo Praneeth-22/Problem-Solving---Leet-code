@@ -25,19 +25,17 @@ Constraints:
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        int res=0,diff=0;
-        int len = nums.size();
-        unordered_map<int,int> m;
-        for(int i=0;i<len;i++) m[nums[i]]++;
-        for(int i=0;i<len;i++){
-            diff = k-nums[i];
-            m[nums[i]]--;
-            if (m.find(diff)!= m.end()){
-                
-                res++;
-            }
-
+        int res=0,cSum=0;
+        unordered_map <int,int>m;
+        m[0]++; //first '0' prefix sum
+        for(int i=0;i<nums.size();i++){
+            cSum+=nums[i];
+            int diff = cSum-k;
+            if(m.find(diff)!=m.end()) res+=m[diff];
+            m[cSum]++;
         }
         return res;
     }
 };
+
+
