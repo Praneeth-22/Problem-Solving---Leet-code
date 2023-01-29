@@ -30,6 +30,7 @@ class Solution:
     def longestPalindrome(self, s: str) -> int:
         d = {}
         count = 0
+        flag = 0
         for i in s:
             if i in d:
                 d[i] =d[i]+1
@@ -40,8 +41,8 @@ class Solution:
                 count = count+v
             else:
                 count = count + v - 1
-        for k,v in d.items():
-            if v%2 != 0:
-                count = count+1
-                break
+                flag = 1
+        if flag ==1:
+            count = count+1
+
         return count
