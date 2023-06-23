@@ -20,7 +20,54 @@ Explanation: Since there is only one element in the array, it is the largest and
 using namespace std;
 #define size 100
 
-void find(int arr[],int len){
+void find(int a[],int len){
+	int min = INT_MAX;
+	int sec_min = INT_MAX;
+	int max = INT_MIN;
+	int sec_max = INT_MIN;
+//	if(len<2) return -1;
+	if(len == 2){
+		if(a[0] < a[1]){
+			sec_min = a[1];
+			sec_max = a[0];
+		}
+	}
+	else{
+	
+	for(int i=0;i<len;i++){
+		if(a[i] < min){
+			sec_min = min;
+			min = a[i];
+		}
+		else if(a[i] < sec_min && a[i] != min){
+			sec_min = a[i];
+		}
+	}
+		for(int i=0;i<len;i++){
+		if(a[i]> max){
+			sec_max = max;
+			max = a[i];
+		}
+		else if(a[i] > sec_max && a[i]!=max) sec_max = a[i];
+	}
+}
+//	if
+	cout <<"sec min :"<<sec_min<<"sec max : "<<sec_max<<endl;
+}
+int main(){
+	int arr [size];
+	int len;
+	cout<<"len: - ";
+	cin>>len;
+	cout<< "enter array values:\t";
+	for(int i=0;i<len;i++){
+		cin>>arr[i];
+	}
+	find(arr,len);
+	return 0;
+}
+
+/*
 	int min = INT_MAX;
 	int max = INT_MIN;
 	for(int i=0;i<len;i++){
@@ -35,25 +82,13 @@ void find(int arr[],int len){
 	for(int i=0;i<len;i++){
 		if(arr[i] - min < min_diff && arr[i]!= min) {
 			sec_min = arr[i];
-			min = arr[i] - min;
+			min_diff = arr[i] - min;
 		}
 		if (max - arr[i] < max_diff && arr[i]!= max){
 			 sec_max = arr[i];
-			 max = max - arr[i];
+			 max_diff = max - arr[i];
 		}
 		
 	}
 	cout<< " -",sec_min,",",sec_max;
-}
-int main(){
-	int arr [size];
-	int len;
-	cout<<"len: - ";
-	cin>>len;
-	cout<< "enter array values:\t";
-	for(int i=0;i<len;i++){
-		cin>>arr[i];
-	}
-	find(arr,len);
-	return 0;
-}
+	*/
