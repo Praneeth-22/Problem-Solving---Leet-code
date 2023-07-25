@@ -3,6 +3,7 @@ import java.util.*;
 
 class Fib {
     public static int Mem(int[] arr, int n) {
+        //Memorization
         if (n <= 1)
             return n;
         if (arr[n] != -1)
@@ -11,6 +12,7 @@ class Fib {
     }
 
     public static int Tab(int[] arr, int n) {
+        //Tabulation
         arr[0] = 0;
         arr[1] = 1;
         for (int i = 2; i <= n; i++) {
