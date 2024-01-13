@@ -34,26 +34,55 @@
 //Explanation: The 3 incremovable subarrays are: [8,7,6], [7,6,6], and [8,7,6,6]. Note that [8,7] is not an incremovable subarray because after removing [8,7] nums becomes [6,6], which is sorted in ascending order but not strictly increasing.
 // 
 
+//
+//class Solution {
+//public:
+//    int incremovableSubarrayCount(vector<int>& nums) {
+//        int cnt=0;
+//        for(int i=0;i<nums.size();i++){
+//            for(int j =i;j<nums.size();j++){
+//                int flag = 1;
+//                int prev = -1;
+//                for(int k=0;k<nums.size();k++ ){
+//                    if(k>=i && k<=j) continue;
+//                    if(prev >= nums[k]){
+//                        flag = 0;
+//                        break;
+//                    }
+//                    prev = nums[k];
+//                }
+//                if(flag) cnt++;
+//            }
+//        }
+//        return cnt;
+//    }
+//};
 
 class Solution {
 public:
+    bool check(vector<int> tmp){
+        for(int i=1;i<tmp.size();i++){
+            if(tmp[i] <= tmp[i-1]) return false;
+        }
+        return true;
+    }
     int incremovableSubarrayCount(vector<int>& nums) {
-        int cnt=0;
-        for(int i=0;i<nums.size();i++){
-            for(int j =i;j<nums.size();j++){
-                int flag = 1;
-                int prev = -1;
-                for(int k=0;k<nums.size();k++ ){
-                    if(k>=i && k<=j) continue;
-                    if(prev >= nums[k]){
-                        flag = 0;
-                        break;
-                    }
-                    prev = nums[k];
+        int n = nums.size();
+        int res = 0;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                vector<int> tmp;
+                for(int k=0;k<i;k++){
+                    tmp.push_back(nums[k]);
                 }
-                if(flag) cnt++;
+                for(int k=j+1;k<n;k++){
+                    tmp.push_back(nums[k]);
+                }
+                if(check(tmp)){
+                    res++;
+                }
             }
         }
-        return cnt;
+        return res;
     }
 };
