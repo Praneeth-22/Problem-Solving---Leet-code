@@ -1,4 +1,4 @@
-//Topological sorting
+//Topological sorting - bfs ( kahn's algorithm)
 #include<bits/stdc++.h>
 using namespace std;
 //DAG
@@ -6,27 +6,30 @@ using namespace std;
 //v in the ordering.
 class Sort{
 	public:
-		void dfs(int start,vector<int> adj[],vector<int> & visited,stack<int> &s){
-			visited[start] = 1;
-			for(auto node : adj[start]){
-				if(!visited[node]) dfs(node,adj,visited,s);
-			}
-			s.push(start);
-		}
 		vector<int> topological_sort(int v,vector<int> adj[]){
-			vector<int>visited(v,0);
-			stack<int> s;
+			vector<int> in_deg(v,0);
 			for(int i=0;i<v;i++){
-				if(!visited[i]){
-					dfs(i,adj,visited,s);
+				for(auto it:adj[i]){
+						in_deg[it]++;
 				}
 			}
-			vector<int> ans;
-			while(!s.empty()){
-				ans.push_back(s.top());
-				s.pop();
+			queue<int> q;
+			for(int i=0;i<v;i++){
+				if(in_deg[i] ==0 ) q.push(i);
 			}
-			return ans;
+			vector<int>order;
+			while(!q.empty()){
+				int node = q.front();
+				q.pop();
+				order.push_back(node);
+				for(auto it :adj[node]){
+					in_deg[it]--;
+					if(in_deg[it] == 0) q.push(it);
+				}
+				
+			}
+			return order;
+
 		}
 };
 int main(){
