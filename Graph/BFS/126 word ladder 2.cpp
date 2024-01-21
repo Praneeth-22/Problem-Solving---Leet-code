@@ -24,7 +24,7 @@
 //Output: []
 //Explanation: The endWord "cog" is not in wordList, therefore there is no valid transformation sequence.
 
-
+	
 class Solution {
 public:
     vector<vector<string>> findLadders(string beginWord, string endWord,
