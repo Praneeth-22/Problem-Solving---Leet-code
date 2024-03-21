@@ -25,9 +25,8 @@ class Graph{
 		while(!queue.empty()){
 			//top ele
 			int node = queue.front();
-			cout<<node<<" ";
 			queue.pop_front();
-			
+			cout<<node<<"->";
 			for(auto it:adj[node]){
 				if(!visited[it]){
 					visited[it] = true;

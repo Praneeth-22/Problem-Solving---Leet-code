@@ -62,9 +62,10 @@ public:
         int nei_row[] = {-1,0,+1,0};
         int nei_col[] = {0,1,0,-1};
         while(q.empty() == false){
-            int row = q.front().first.first; // get row
-            int col = q.front().first.second; // get col
-            int tim = q.front().second;
+        	auto ele = q.front();
+            int row = ele.first.first; // get row
+            int col = ele.first.second; // get col
+            int tim = ele.second;
             q.pop();
             final_time = max(final_time,tim);
             for(int i = 0;i < 4; i++){

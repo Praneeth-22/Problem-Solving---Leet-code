@@ -23,8 +23,9 @@ public:
         }
 
         while (!q.empty()) {
-            int row = q.front().first;
-            int col = q.front().second;
+        	auto ele = q.front();
+            int row = ele.first;
+            int col = ele.second;
             q.pop();
 
             int row_nei[] = {-1, 0, 1, 0};
@@ -48,10 +49,9 @@ public:
 int main() {
     // Example usage
     vector<vector<int>> inputMatrix = {
-        {0, 1, 0, 1},
-        {1, 1, 1, 1},
-        {1, 1, 0, 1},
-        {1, 0, 1, 1}
+        {0, 1, 0},
+        {0, 0, 0},
+        {0, 0, 1}
     };
 
     Solution solution;
