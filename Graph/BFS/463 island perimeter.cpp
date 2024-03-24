@@ -38,6 +38,7 @@ public:
             for (int j = 0; j < grid[i].size(); j++) {
                 if (grid[i][j] == 1) {
                     int waterCnt = 0;
+                    //checking 4 directions from node
                     for (int it = 0; it < 4; it++) {
                         int nrow = i + nei_row[it];
                         int ncol = j + nei_col[it];
