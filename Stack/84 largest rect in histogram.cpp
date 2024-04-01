@@ -62,7 +62,7 @@ public:
         //  }
         //  return maxArea;
 
-        //
+        // stack will have increasing ordered values.
         stack<int> st;
         int leftSmall[n],rightSmall[n];
         for(int i =0;i<n;i++){
