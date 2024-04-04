@@ -24,18 +24,47 @@
 //Input: nums = [2,2,2,1,2,2,1,2,2,2], k = 2
 //Output: 16
 
+//class Solution {
+//public:
+//    int numberOfSubarrays(vector<int>& nums, int k) {
+//        int left=0,right = k-1;
+//        int n = nums.size();
+//        int cnt=0;
+//        while(right<n){
+//            int temp=0;
+//            for(int i=left;i<right;i++){
+//                if(nums[i]%2 !=0) temp++;
+//            }
+//            right++;
+//        }
+//    }
+//};
+
+
+//using the approach of the binary subarray with sum
 class Solution {
 public:
-    int numberOfSubarrays(vector<int>& nums, int k) {
-        int left=0,right = k-1;
-        int n = nums.size();
-        int cnt=0;
-        while(right<n){
-            int temp=0;
-            for(int i=left;i<right;i++){
-                if(nums[i]%2 !=0) temp++;
+    int findSum(vector<int>& nums,int goal){
+        int l = 0,r = 0,sum=0,cnt=0,n = nums.size();
+        if(goal < 0 ) return 0;
+        while(r < n){
+            sum +=nums[r];
+            while(sum > goal){
+                sum-=nums[l];
+                l++;
             }
-            right++;
+            cnt+=(r-l+1);
+            r++;
         }
+        return cnt;
+    }
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]%2==0) nums[i] = 0;
+            else nums[i] = 1;
+        }
+        return findSum(nums,k) - findSum(nums,k-1);
     }
 };
+
+
