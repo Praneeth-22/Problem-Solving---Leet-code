@@ -35,29 +35,39 @@
 
 using namespace std;
 
+//
+//    int numRescueBoats(vector<int>& people, int limit) {
+//        // sort(people.begin(),people.end());
+//         int cnt = 1, sum = 0;
+//        for (int weight : people) {
+//            sum += weight;
+//            if (sum > limit) {
+//                cnt++;
+//                sum = weight;
+//            }
+//        }
+//        return cnt;
+//    }
+//};
+
 class Solution {
 public:
-    int check(vector<int>& people, int mid) {
-        int cnt = 1, sum = 0;
-        for (int weight : people) {
-            sum += weight;
-            if (sum > mid) {
-                cnt++;
-                sum = weight;
-            }
-        }
-        return cnt;
-    }
 
     int numRescueBoats(vector<int>& people, int limit) {
-        // sort(people.begin(),people.end());
-         int cnt = 1, sum = 0;
-        for (int weight : people) {
-            sum += weight;
-            if (sum > limit) {
-                cnt++;
-                sum = weight;
-            }
+        sort(people.begin(),people.end());
+         int cnt = 0, sum = 0;
+        // for (int weight : people) {
+        //     sum += weight;
+        //     if (sum > limit) {
+        //         cnt++;
+        //         sum = weight;
+        //     }
+        // }
+        int l = 0,r= people.size()-1;
+        while(l<=r){
+            if(people[l]+people[r] <= limit) l++;
+            r--;
+            cnt++;
         }
         return cnt;
     }
