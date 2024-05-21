@@ -29,16 +29,33 @@ class Solution {
 public:
     int countPrimes(int n) {
         // divisible by  1 and itself
-        if(n <=2) return 0;
-        int res=0;
-        for(int i =2;i<n;i++){
-            int cnt=0;
-            for(int j=2;j<=i;j++){
-                if(i%j ==0) cnt++;
+//        if(n <=2) return 0;
+//        int res=0;
+//        for(int i =2;i<n;i++){
+//            int cnt=0;
+//            for(int j=2;j<=i;j++){
+//                if(i%j ==0) cnt++;
+//            }
+//            if(cnt == 1) res++;
+//            cnt=0;
+//        }
+//        return res;
+
+
+
+        //  Sieve of Eratosthenes algorithm.
+  vector<int> isprime(n,0);
+        isprime[0] = 1;
+        isprime[1] = 1;
+        for(int i=2;i<=sqrt(n);i++){
+            if(isprime[i] == 0){
+                for(int j = i*i;j<n;j+=i){
+                    isprime[j] = 1;
+                }
             }
-            if(cnt == 1) res++;
-            cnt=0;
         }
-        return res;
+        int cnt=0;
+        for(auto i:isprime) if(i == 0) cnt++;
+        return cnt;
     }
 };
