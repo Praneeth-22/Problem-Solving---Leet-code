@@ -1,0 +1,5 @@
+# Write your MySQL query statement below
+#join : inner join - intersection,left (outer) - ,right (outer), full (outer) - union
+-- select ___ from _____ ()join ___ on ____
+select p.firstName,p.lastName,a.city,a.state
+from Person as p left join Address as a on p.personId = a.personId
