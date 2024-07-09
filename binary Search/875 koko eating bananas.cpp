@@ -42,8 +42,11 @@ public:
         while (low < high) {
             int mid = low + (high - low) / 2;
             int totalHours = 0;
-            for (int pile : piles) {
-                totalHours += (pile + mid - 1) / mid;
+              for (int pile : piles) {
+                //can mid-1 to push result to next integer
+                // totalHours += (pile + mid - 1) / mid;
+                //or
+                totalHours += ceil((double)pile/(double)mid);
             }
             if (totalHours > h) {
                 low = mid + 1;

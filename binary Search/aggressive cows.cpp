@@ -63,7 +63,7 @@ class Solution{
 		}
 		bool canPlace(vector<int> nums,int dist,int k){
 			int cnt =1,last = nums[0];
-			for(int i=0;i<nums.size();i++){
+			for(int i=1;i<nums.size();i++){
 				if(nums[i] - last >=dist){
 					cnt++;
 					last = nums[i];
@@ -74,8 +74,8 @@ class Solution{
 		}
 };
 int main(){
-	vector<int> v= {0,3,4,7,10,9};
+	vector<int> v= {1,2,3};
 	Solution s;
-	cout<<s.aggressiveCows(v,4);
+	cout<<s.aggressiveCows(v,2);
 	return 0;
 }
