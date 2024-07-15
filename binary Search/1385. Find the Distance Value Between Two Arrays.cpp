@@ -65,14 +65,21 @@ public:
         //     if(!flag) cnt++;
         // }
         //
-        sort(arr1.begin(),arr1.end());
         sort(arr2.begin(),arr2.end());
-        int l=0,r=m-1;
         for(int i=0;i<n;i++){
-          while(l<r){
+            bool flag =false;
+            int l=0,r=m-1;
+          while(l<=r){
             int mid = (l+r)/2;
-            if(arr2[mid])
+            if(abs(arr2[mid]-arr1[i])<=d){
+                flag = true;
+                break;
+            }
+            else if ( arr2[mid]<arr1[i]) l = mid+1;
+            else r = mid-1;
           }
+          if(!flag) cnt++;
+          //if(l<r) cnt++;
         }
 
         return cnt;
