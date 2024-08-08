@@ -46,11 +46,30 @@ public:
         return sum;
     }
     long long makeIntegerBeautiful(long long n, int target) {
-        if( digitSum(n) <= target) return 0;
-        int x=1;
-        while(digitSum(n+x)>target){
-            x++;
+        //brute force
+        // if( digitSum(n) <= target) return 0;
+        // int x=1;
+        // while(digitSum(n+x)>target){
+        //     x++;
+        // }
+        // return x;
+        long long ans=0;
+        long long num = n;
+        int sum =0;
+        int pos=0;
+        sum = digitSum(num);
+        while(sum>target){
+            if(num%10==0) {
+                pos++;
+                num/=10;
+            }else{
+                int toAdd = 10-(num%10);
+                num+=toAdd;
+                sum=0;
+                sum = digitSum(num);
+                ans+=(pow(10,pos)*toAdd);
+            }
         }
-        return x;
+        return ans;
     }
 };
