@@ -43,19 +43,32 @@
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
-        int n = digits.size();
-        vector<int> res;
-        long digitsSum=0;
-        for(auto it : digits){
-            digitsSum= (digitsSum*10)+it;
+         // brute force
+        // int n = digits.size();
+        // vector<int> res;
+        // long digitsSum=0;
+        // for(auto it : digits){
+        //     digitsSum= (digitsSum*10)+it;
+        // }
+        // digitsSum++;
+        // while(digitsSum>0){
+        //     int rem = digitsSum%10;
+        //     res.push_back(rem);
+        //     digitsSum/=10;
+        // }
+        // reverse(res.begin(),res.end());
+        // return res;
+        //optimal
+        int idx = digits.size()-1;
+        while(idx>=0){
+            if(digits[idx] == 9) digits[idx] =0;
+            else {
+                digits[idx] +=1;
+                return digits;
+            }
+            idx--;
         }
-        digitsSum++;
-        while(digitsSum>0){
-            int rem = digitsSum%10;
-            res.push_back(rem);
-            digitsSum/=10;
-        }
-        reverse(res.begin(),res.end());
-        return res;
+        digits.insert(digits.begin(),1);
+        return digits;
     }
 };
