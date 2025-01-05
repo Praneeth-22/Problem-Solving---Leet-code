@@ -20,7 +20,7 @@
 // Output: 1234
 // Example 3:
 
-// Input: n = 332
+// Input: n = 332i
 // Output: 299
 
 
