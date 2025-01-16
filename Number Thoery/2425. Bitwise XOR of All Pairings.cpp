@@ -30,12 +30,21 @@
 class Solution {
 public:
     int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
-        int res =0;
-        for (auto it : nums1){
-            for(auto jt:nums2){
-                res^=it^jt;
-            }
-        }
+        // brute force
+        int res = 0;
+        // for (auto it : nums1){
+        //     for(auto jt:nums2){
+        //         res^=it^jt;
+        //     }
+        // }
+
+        // Associative === Commutative for XOR
+        if (nums2.size() % 2 == 1)
+            for (auto it : nums1)
+                res ^= it;
+        if ((nums1.size() % 2 == 1))
+            for (auto it : nums2)
+                res ^= it;
         return res;
     }
 };
