@@ -62,8 +62,8 @@ public:
         return false;
     }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        vector<int> adj[graph.size()];
-        vector<int> safenodes;
+        vector<int> adj[graph.size()]; //adjacent list of given graph
+        vector<int> safenodes; //result safe node
         for (int i = 0; i < graph.size(); i++) {
             for (int j = 0; j < graph[i].size(); j++) {
                 adj[i].push_back(graph[i][j]);
