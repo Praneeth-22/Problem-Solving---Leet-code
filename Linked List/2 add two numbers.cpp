@@ -43,26 +43,43 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* dummy = new ListNode(-1);
-        ListNode* curr = dummy;
-        ListNode* temp1 = l1;
-        ListNode* temp2 = l2;
+        // ListNode* dummy = new ListNode(-1);
+        // ListNode* curr = dummy;
+        // ListNode* temp1 = l1;
+        // ListNode* temp2 = l2;
+        // int carry = 0;
+        // while(temp1!= NULL || temp2!= NULL){
+        //     int sum = carry;
+        //     if(temp1) sum+=temp1->val;
+        //     if(temp2) sum+=temp2->val;
+        //     ListNode* temp = new ListNode(sum%10);
+        //     carry = sum/10;
+        //     curr->next = temp;
+        //     curr = curr->next;
+        //      if(temp1) temp1=temp1->next;
+        //     if(temp2) temp2=temp2->next;
+        // }
+        // if(carry){
+        //      ListNode* temp = new ListNode(carry);
+        //      curr->next = temp;
+        // }
+        // return dummy->next;
+        // LeetCode solution: Time complexity : O(max(m,n))
+        ListNode* dummyHead = new ListNode(0);
+        ListNode* curr = dummyHead;
         int carry = 0;
-        while(temp1!= NULL || temp2!= NULL){
-            int sum = carry;
-            if(temp1) sum+=temp1->val;
-            if(temp2) sum+=temp2->val;
-            ListNode* temp = new ListNode(sum%10);
-            carry = sum/10;
-            curr->next = temp;
+        while (l1 != NULL || l2 != NULL || carry != 0) {
+            int x = l1 ? l1->val : 0;
+            int y = l2 ? l2->val : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            curr->next = new ListNode(sum % 10);
             curr = curr->next;
-             if(temp1) temp1=temp1->next;
-            if(temp2) temp2=temp2->next;
+            l1 = l1 ? l1->next : nullptr;
+            l2 = l2 ? l2->next : nullptr;
         }
-        if(carry){
-             ListNode* temp = new ListNode(carry);
-             curr->next = temp;
-        }
-        return dummy->next;
+        ListNode* result = dummyHead->next;
+        delete dummyHead;  // Freeing the memory allocated for dummyHead
+        return result;
     }
 };
