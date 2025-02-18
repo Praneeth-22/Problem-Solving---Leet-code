@@ -29,35 +29,29 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        //fails for non-char
-    //     set<char> st;
-    //     int i =0;
-    //     int n = s.length();
-    //     int cnt=0;
-    //     while(i!=n){
-    //         if(st.find(s[i])!=st.end()){
-    //             int l = st.size();
-    //             cnt = max(cnt,l);
-    //             st.erase(s[0]);
-    //             st.insert(s[i]);
-    //         }
-    //         else st.insert(s[i]);
-    //         i++;
-    //     }
-    //     return cnt;
-    // }
-    vector<int> check(255,-1);
-    int l=0,r=0,n=s.size(),cnt=0;
-    while(r<n){
-        int e=0;
-        if(check[s[r]]!=-1){
-            if(check[s[r]]>=l) l = check[s[r]]+1;
+    //brute force
+        // int len =0;
+        // for(int i=0;i<s.size();i++){
+        //     unordered_set<char> st;
+        //     for(int j=i;j<s.size();j++){
+        //         if(st.find(s[j])!=st.end()) break;
+        //         st.insert(s[j]);
+        //     }
+        //     int curLen =st.size();
+        //     len = max(len,curLen);
+        // }
+        //sliding window
+        int lIdx =0, rIdx =0, len =0;
+        vector<int> occ(128,0);
+        while(rIdx < s.length()){
+            occ[s[rIdx]]++;
+            while(occ[s[rIdx]]>1){
+                occ[s[lIdx]]--;
+                lIdx++;
+            }
+            len = max(len, rIdx-lIdx+1);
+            rIdx++;
         }
-        e = r-l+1;
-        cnt = max(cnt,e);
-        check[s[r]] = r;
-        r++;
-    }
-    return cnt;
+       return len;
     }
 };
