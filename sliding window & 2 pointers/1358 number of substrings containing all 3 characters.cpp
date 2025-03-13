@@ -31,28 +31,37 @@
 //3 <= s.length <= 5 x 10^4
 //s only consists of a, b or c characters.
 class Solution {
-public:
-    int numberOfSubstrings(string s) {
-        int arr[3]= {-1,-1,-1};
-        int n = s.length(),cnt=0,l=0,r=0;
-        //
-        // for(int i=0;i<n;i++){
-        //     mp.clear();
-        //     for(int j=i;j<n;j++){
-        //         mp[s[j]]++;
-        //         if(mp.size() == 3){
-        //             cnt++;
-        //         }
-        //     }
-        // }
-        //
-        while(r<n){
-            arr[s[r]-'a'] = r;
-            if(arr[0] != -1 && arr[2]!=-1 && arr[1] !=-1){
-                cnt+=(1+min(arr[0],min(arr[1],arr[2])));
+    public:
+        int numberOfSubstrings(string s) {
+            //brute force 53/54
+            //unordered_map<char,int> mp;
+            // int cnt=0;
+            // for(int i=0;i<s.length();i++){
+            //     for(int j=i;j<s.length();j++){
+            //         mp[s[j]]++;
+            //         if(mp.size() == 3) {
+            //             cnt+=(s.length()-j);
+            //             break;
+            //         }
+            //     }
+            //     mp.clear();
+            // }
+            // return cnt;
+            //optimal
+            int freq[3] = {0,0,0};
+            int cnt=0,curCnt=0,l=0,r=0,n=s.length();
+            while(r<n){
+                char c = s[r];
+                freq[c-'a']++;
+                if(freq[c-'a'] == 1) curCnt++;
+                while(curCnt ==3){
+                    cnt+=(n-r);
+                    char c = s[l];
+                    if(--freq[c-'a'] == 0)curCnt--;
+                    l++;
+                }
+                r++;
             }
-            r++;
+            return cnt;
         }
-        return cnt;
-    }
-};
+    };
